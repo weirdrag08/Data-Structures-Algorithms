@@ -119,6 +119,80 @@ int main()
             l2.display();
         }
 
+        else if(s == "mergeSort"){
+            LinkedList *my_list = new LinkedList();
+            int element, size;
+            cin >> size;
+            while(size--){
+                cin >> element;
+                my_list->addLast(element);
+            }
+           LinkedList output_ll = merge_sort(my_list-> head, my_list-> tail);
+           output_ll.display();
+        }
+
+        else if(s == "removeDuplicatesSorted"){
+            LinkedList my_list;
+            int element, size;
+            cin >> size;
+            while(size--){
+                cin >> element;
+                my_list.addLast(element);
+            }
+            LinkedList *output_ll = remove_duplicates_sorted(my_list);
+            output_ll-> display();
+        }
+
+        else if(s == "removeDuplicatesSortedWithoutFunction"){
+            LinkedList my_list;
+            int element, size;
+            cin >> size;
+            while (size--)
+            {
+                cin >> element;
+                my_list.addLast(element);
+            }
+            Node *output_head = remove_duplicates_sorted_without_func(my_list);
+            my_list.display();
+            Node *temp = output_head;
+            while(temp != NULL){
+                cout << temp-> data << ' ';
+                temp = temp-> next;
+            }
+            cout << '\n';
+        }
+
+        else if(s == "oddEven"){
+            LinkedList my_list;
+            int element, size;
+            cin >> size;
+            while(size--){
+                cin >> element;
+                my_list.addLast(element);
+            }
+            LinkedList *output_ll = oddEven(my_list);
+            output_ll-> display();
+        }
+        else if(s == "displayReverse"){
+            int size, element;
+            cin >> size;
+            while(size--){
+                cin >> element;
+                list.addLast(element);
+            }
+            list.displayReverse();
+        }
+
+        else if(s == "reversePR"){
+            int size, element;
+            cin >> size;
+            while(size--){
+                cin >> element;
+                list.addLast(element);
+            }
+            list.reversePR();
+        }
+
     } while (s != "quit");
 }
 
