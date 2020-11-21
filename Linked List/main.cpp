@@ -192,7 +192,15 @@ int main()
             }
             list.reversePR();
         }
-
+        else if(s == "isPalindrome"){
+            int element, size;
+            cin >> size;
+            while(size--){
+                cin >> element;
+                list.addLast(element);
+            }
+            // list.isPalindrome();
+        }
     } while (s != "quit");
 }
 

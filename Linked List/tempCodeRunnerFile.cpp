@@ -1,1 +1,1 @@
-removeDuplicatesSortedWithoutFunction
+sPalindr
