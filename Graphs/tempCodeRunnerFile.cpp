@@ -1,3 +1,3 @@
- // for(int i : distance){
-        //     i = INT_MAX;
-        // }
+for(int i = 0; i < V; i++){
+        cout << i << "==> " << distance[i] << '\n';
+    }
