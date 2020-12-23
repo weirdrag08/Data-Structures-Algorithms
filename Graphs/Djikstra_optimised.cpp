@@ -1,100 +1,112 @@
 #include<iostream>
-#include<list>
 #include<unordered_map>
-#include<queue>
+#include<list>
+#include<set>
+#include<climits>
+#include<utility>
+using namespace std::chrono;
 using namespace std;
 
-// class vertex{
-// public:     
-//     pair<int, int> p;
-    
-
-//     vertex(int value){
-//         this-> p.first = INT_MAX; 
-//         this-> p.second = value;
-//     }
-
-// };
-
-pair<int, int> vtx_finder(priority_queue<pair<int, int>> pq)
-{
-    pair<int, int> top = pq.top();
-    pq.pop();
-    return top;
-}
-
 class Graph{
-public:     
-    unordered_map<int , list<pair<int, int> > > gmap;
+public: 
+    // * [vertex, {dest, weight}]
+    unordered_map<int, list<pair<int, int> > > gmap;
 
-    void addEdge(int src, int dest, int weight){
-          
-            pair<int, int> new_pair_dest;
-            new_pair_dest.first = dest;
-            new_pair_dest.second = weight;
-            gmap[src].push_back(new_pair_dest);
-
-           pair<int, int> new_pair_src;
-           new_pair_src.first = src;
-           new_pair_src.second = weight;
-           gmap[dest].push_back(new_pair_src);
+    void addEdge(int src, int dest, int distance){
+        pair<int, int> pair_src (dest, distance);
+        gmap[src].push_back(pair_src);
+        pair<int, int> pair_dest (src, distance);
+        gmap[dest].push_back(pair_dest);
     }
 
-    void djikstra_optimised(int V, int E, Graph g, priority_queue<pair<int, int>> pq, int *distance)
-    {
+    void djikstra(int V, int E, Graph g){
+    // * visited array to mark vertices which were visited    
         bool *visited = new bool[V];
-        for (int i = 0; i < V; i++)
-        {
+
+    // * distance array maintains the current shortest path/distance from the source, and gives O(1) access to it's element which makes implementation faster while accessing a vertex in the set    
+        int *distance = new int[V];
+
+    // * set maintains an increasing order in terms of distance from the source (How far a vertex is from the source)    
+        set<pair<int, int> > my_set;
+
+        for(int i = 0; i < V; i++){
+            if(i == 0){
+                distance[i] = 0;
+            }
+            else{
+                distance[i] = INT_MAX;
+            }
             visited[i] = false;
         }
+        int vtx = 0;
+        pair<int, int> src_pair(distance[vtx], vtx);
+        my_set.insert(src_pair);
 
-        int count = 0;
-        while (count < V)
-        {
-            pair<int, int> vtx = vtx_finder(pq);
-            int value = vtx.second;
-            for (auto neighbour : gmap[value])
-            {
+        while(!my_set.empty()){
+            pair<int, int> curr_pair = *(my_set.begin());
+            my_set.erase(my_set.begin());
+          
+            visited[curr_pair.second] = true;
+            for(auto neighbour : gmap[curr_pair.second]){
+             if(visited[neighbour.first] == false){
+                 int child_vtx, distance_from_src, distance_from_vtx;
+                 child_vtx = neighbour.first;
+                 distance_from_vtx = neighbour.second;
+                 distance_from_src = curr_pair.first + neighbour.second;
 
+                 pair<int, int> search_pair(distance[child_vtx], child_vtx);
+
+                 auto found = my_set.find(search_pair);
+                 if (found == my_set.end())
+                 {
+                     distance[child_vtx] = distance_from_src;
+                     pair<int, int> child_pair(distance[child_vtx], child_vtx);
+                     my_set.insert(child_pair);
+                 }
+                 else
+                 {
+                     pair<int, int> child_pair = *(found);
+                     if (distance_from_src < child_pair.first)
+                     {
+                         my_set.erase(found);
+                         distance[child_vtx] = distance_from_src;
+                         child_pair.first = distance[child_vtx];
+                         my_set.insert(child_pair);
+                     }
+                 }
+             }
+           }
+        }
+        for(int i = 0; i < V; i++){
+            if(distance[i] == INT_MAX){
+                cout << "Vertex: " << i << "==> "<< "-1" << '\n';
+            }
+            else{
+                cout << "Vertex: " << i << "==> " << distance[i] << '\n'; 
             }
         }
     }
 };
 
-
-
-
 int main(){
+
+    std::ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
     Graph g;
-    priority_queue<pair<int, int> > pq;
-    int V, E, u, v, w;
+    int V, E, u, v, d;
     cin >> V >> E;
-    int *distance = new int[V];
-
-    for(int i = 0;  i < E; i++){
-        cin >> u >> v >> w;
-        g.addEdge(u, v, w);
+    for(int i = 0; i < E; i++){
+        cin >> u >> v >> d;
+        g.addEdge(u, v, d);
     }
-    pair<int, int> p;
-    for(int i = 0; i < V; i++){
-        if(i == 0){
-            distance[i] = 0;
-            p.first = 0;
-            p.second = i;
-        }
-        else{
-            p.first = INT_MAX;
-            p.second = i;
-            distance[i] = INT_MAX;
-        }
-        pq.push(p);
-    }
+    auto start = high_resolution_clock::now();
 
-//    while(!pq.empty()){
-//        pair<int, int> top = pq.top();
-//        cout << "Value: " << (-1) * top.second << "     " <<  "Distance==> " << (-1) * top.first << '\n';
-//        pq.pop();
-//    }
-    g.djikstra_optimised(V, E, g, pq, distance);
+    g.djikstra(V, E, g);
 
+    auto stop = high_resolution_clock::now();
+
+    
+    auto duration = duration_cast<microseconds>(stop - start);
+
+    cout << "Time taken by function: " << duration.count() << " microseconds" << endl;
 }
