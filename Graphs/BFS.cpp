@@ -1,54 +1,74 @@
-#include <iostream>
-#include <map>
-#include <list>
+#include<iostream>
 #include<queue>
+#include<list>
 #include<unordered_map>
+#include<vector>
 using namespace std;
 
-template <typename all>
-class Graph
-{
-    map<all, list<all> > gmap;
+class Graph{
+public: 
+    unordered_map<int, list<int> > gmap;
 
-public:
-    void addEdge(all u, all v, bool bidir = true)
-    {
-        gmap[u].push_back(v);
-        if (bidir)
-        {
-            gmap[v].push_back(u);
+    void addEdge(int src, int dest, bool bidir = true){
+        gmap[src].push_back(dest);
+        if(bidir){
+            gmap[dest].push_back(src);
         }
-    }
-    void bfs(all src){
-        unordered_map<all, int> visited;
-        queue<all> q;
+    } 
+
+    void bfs(int V, int E, int src){
+        queue<int> q;
+        vector<bool> visited(V, false);
+        vector<int> distance(V, -1);
+        distance[src] = 0; 
         q.push(src);
-        visited[src] = 1;
-        cout << "{";
+        visited[src] = true;
         while(!q.empty()){
-            all front = q.front();
-            cout << front << ", ";
-            q.pop();
-            for(auto neighbour : gmap[front]){
-                if(visited.count(neighbour) == 0){
-                q.push(neighbour);
-                visited[neighbour] = 1;
+            int front = q.front();
+            q.pop();   
+            for(int neighbour : gmap[front]){
+                if(visited[neighbour] == false){
+                    q.push(neighbour);
+                    visited[neighbour] = true;
+                    distance[neighbour] = distance[front] + 1;
                 }
             }
         }
-        cout << "}" << '\n'; 
+        for(int i = 0; i < V; i++){
+
+            if(i == src){
+                continue;
+            }
+
+            if(distance[i] != -1){
+                cout << (6 * distance[i]) << " ";
+            }
+            else{
+                cout << distance[i] << " ";
+            }
+        }
     }
+
 };
 
-int main()
-{
-    Graph<int> g;
-    g.addEdge(0, 1);
-    g.addEdge(0, 4);
-    g.addEdge(1, 2);
-    g.addEdge(2, 3);
-    g.addEdge(3, 5);
-    g.addEdge(3, 4);
-    g.addEdge(2, 4);
-    g.bfs(0);
+
+int main(){
+    std::ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    int tc;
+    cin >> tc;
+    for(int i = 0; i < tc; i++){
+        Graph g;
+        int V, E, u, v, src;
+        cin >> V >> E;
+        for (int i = 0; i < E; i++)
+        {
+            cin >> u >> v;
+            g.addEdge(u - 1, v - 1);
+        }
+        cin >> src;
+        src -= 1;
+        g.bfs(V, E, src);
+        cout << '\n';
+    }
 }
