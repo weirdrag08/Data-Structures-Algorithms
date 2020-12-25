@@ -65,7 +65,15 @@ void bellman_ford(int V, int E, Edge *Edges){
     cout << "Current Distance of Each Vertex: " << '\n' << '\n';
 
     for(int i = 0; i < V; i++){
-        cout << "Vertex: " << i << "  Distance ==> "<< resultant_distance[i] << '\n';
+       if(resultant_distance[i] == INT_MIN){
+           cout << "Vertex: " << i << "  Distance ==> " << "- ∞" << '\n';
+       }
+       else if(resultant_distance[i] == INT_MAX){
+           cout << "Vertex: " << i << "  Distance ==> " << "∞" << '\n';
+       }
+       else{
+           cout << "Vertex: " << i << "  Distance ==> " << resultant_distance[i] << '\n';
+       }
     }
 }
 

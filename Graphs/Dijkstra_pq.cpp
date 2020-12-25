@@ -51,7 +51,7 @@ public:
         }
         for(int i = 0; i < V; i++){
             if(distance[i] == INT_MAX){
-                 cout << "Vertex: " << i << " ==> " << "-1" << '\n';   
+                 cout << "Vertex: " << i << " ==> " << "∞" << '\n';   
             }
             else{
                cout << "Vertex: " << i << " ==> " << distance[i] << '\n';
