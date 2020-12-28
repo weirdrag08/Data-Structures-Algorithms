@@ -47,13 +47,17 @@ public:
                 continue;
             }
             visited[top.second] = true;
+
+// * to print in order the vertices came out of the pq 
            cout << top.second << " via " << path[top.second] << " @ " << distance[top.second] << '\n';
+
             for(auto neighbour : gmap[top.second]){
                 if(!visited[neighbour.first]){
                     int child = neighbour.first;
                     int child_from_vtx = neighbour.second;
                     int child_from_src = top.first + neighbour.second;
 
+// * equality operator is involved so that we can update the newest/latest distance which is equal to the previous one stored as the current distance.(TEST CASE GIVEN BELOW)
                     if(child_from_src <= distance[child]){
                         distance[child] = child_from_src;
                         pq.push(mp(distance[child], child));
@@ -62,9 +66,11 @@ public:
                 }
             }
         }
-        // for(int i = 0; i < V; i++){
-        //     cout << i << " via " << path[i] << " @ " << distance[i] << '\n';
-        // }
+// * to print the vertices in a sorted manner
+
+        for(int i = 0; i < V; i++){
+            cout << i << " via " << path[i] << " @ " << distance[i] << '\n';
+        }
     }
 };
 
@@ -81,3 +87,33 @@ int main(){
     cin >> src;
     g.shortest_path(V, E, g, src);
 }
+// ? Test case 1
+/*
+7 9 
+0 1 10 
+1 2 10 
+2 3 10 
+0 3 40 
+3 4 2 
+4 5 3 
+5 6 3 
+4 6 8 
+2 5 5 
+0
+*/
+
+// ? Test case 2
+
+/*
+7 9 
+0 1 10 
+1 2 10 
+2 3 10 
+0 3 40 
+3 4 2 
+4 5 3 
+5 6 3 
+4 6 8 
+2 5 5 
+2
+*/
