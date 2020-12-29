@@ -16,6 +16,28 @@ typedef pair<int, int> pi;
 typedef vector<int> vi;
 typedef vector<bool> vb;
 
+// * Used in sort function ==> sort(begin(), end(), compare)
+/*
+bool compare(const obj &o1, const obj &o2){
+    return o1.property < o2.property;
+}
+*/
+// * customised compare function for in-built sort function, in case of object sorting (sorting objects on the basis of one of it's property)
+// * o1.property < o2.property ==> sorts the objects in increasing order on the basis of selected property, for decreasing order we do o1.property > o2.property
+// * The function simply return true or false on the basis of arrangement of object. The below function will return true, when o1 will come before o2 in the array, otherwise it will return false.
+
+// * Used in priority queue ==> priority_queue<object, vector<object>, compare> pq;
+/*
+struct compare{
+    bool operator()(const obj &o1, const obj &o2){
+        return o1.property > o2.property;
+    }
+};
+*/
+// * Customised compare parameter/function for priority queue, in case of object sorting(Sorting objects on the basis of one of it's property)
+//* o1.property > o2.property ==> sorts the object in increasing order on the basis of selected property, for decreasing order we do o1.property < o2.property
+// * The function returns true or false on the basis of arrangement of objects in priority queue. The above function will return true, when o1 will come after o2 in the priority queue, otherwise it will return false.
+
 class Graph{
 public: 
     unordered_map<int, list<pi> > gmap;
