@@ -1,12 +1,12 @@
 #include<iostream>
 #include<unordered_map>
 #include<list>
-#include<climits>
-#include<utility>
-#include<algorithm>
-#include<queue>
-#include<string>
 #include<vector>
+#include<algorithm>
+#include<climits>
+#include<string>
+#include<queue>
+#include<utility>
 using namespace std;
 
 #define mp make_pair
@@ -16,37 +16,10 @@ using namespace std;
 typedef pair<int, int> pi;
 typedef vector<int> vi;
 typedef vector<bool> vb;
-typedef vector<vector<int>> vvi;
-
-
-// * Used in sort function ==> sort(begin(), end(), compare)
-/*
-bool compare(const obj &o1, const obj &o2){
-    return o1.property < o2.property;
-}
-*/
-// * customised compare function for in-built sort function, in case of object sorting (sorting objects on the basis of one of it's property)
-// * o1.property < o2.property ==> sorts the objects in increasing order on the basis of selected property, for decreasing order we do o1.property > o2.property
-// * The function simply return true or false on the basis of arrangement of object. The below function will return true, when o1 will come before o2 in the array, otherwise it will return false.
-
-
-
-
-// * Used in priority queue ==> priority_queue<object, vector<object>, compare> pq;
-/*
-struct compare{
-    bool operator()(const obj &o1, const obj &o2){
-        return o1.property > o2.property;
-    }
-};
-*/
-// * Customised compare parameter/function for priority queue, in case of object sorting(Sorting objects on the basis of one of it's property)
-//* o1.property > o2.property ==> sorts the object in increasing order on the basis of selected property, for decreasing order we do o1.property < o2.property 
-// * The function returns true or false on the basis of arrangement of objects in priority queue. The above function will return true, when o1 will come after o2 in the priority queue, otherwise it will return false. 
 
 
 class Graph{
-public:
+public: 
     unordered_map<int, list<pi> > gmap;
 
     void addEdge(int src, int dest, int weight, bool bidir = true){
@@ -56,24 +29,70 @@ public:
         }
     }
 
-    void all_path(int V, int E, int src, int dest, vb* visited){
-            visited-> at(src) = true;
-            if(src == dest){
-              cout << src << '\n';
-            }
-        
+
+    vector<int>* print_all_paths_helper(int V, int E, int src, int dest, vb &visited){
+    //  1-> 2<->3--> 5   
+    //      |   |    ^ 
+    //      v   |    |
+    //      |    --> 4
+    //      v
+    //      6-> 5
+   visited[src] = true; 
+    if (src == dest){
+        vi *base_arr = new vi();
+        base_arr-> push_back(src);
+        return base_arr;
+        }
+        vi *recursive_path = NULL;
         for(auto neighbour : gmap[src]){
-            if(!visited-> at(src)){
-                all_path(V, E, neighbour.first, dest, visited);
-                cout << 
-                visited-> at(neighbour.first) = true;
+            if(!visited[neighbour.first]){
+                visited[neighbour.first] = true;
+                    recursive_path = print_all_paths_helper(V, E, neighbour.first, dest, visited);
+                if(recursive_path){
+                    break;
+                }
             }
         }
+        if(recursive_path){
+            recursive_path-> push_back(src);
+        }
+        return recursive_path;
+    }
+
+
+    void print_all_paths(int V, int E, int src, int dest){
+       for(int i = 0 ; i < V; i++){   
+            vb visited(V, false);
+            vector<int> *path = print_all_paths_helper(V, E, i, dest, visited);
+            if(path){
+                for(int j = path-> size() - 1; j >= 0; j--){
+                    cout << path-> at(i);
+                }
+                cout << '\n';
+            }
+       }
     }
 
 };
-
-
 int main(){
-
+    std::ios_base::sync_with_stdio(false);
+    Graph g;
+    int V, E, src, dest, u, v, w;
+    cin >> V >> E;
+    for(int i = 0; i < E; i++){
+        cin >> u >> v >> w;
+        g.addEdge(u, v, w);
+    }
+    cin >> src >> dest;
+    g.print_all_paths(V, E, src, dest);
 }
+
+
+
+
+// FOR:
+// vb vis
+
+// func(i, dest, vis);
+
+// [!, !, , , , , , , , , , ,]
