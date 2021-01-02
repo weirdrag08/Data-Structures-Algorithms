@@ -2,8 +2,8 @@
 #include<unordered_map>
 #include<list>
 #include<vector>
-#include<algorithm>
 #include<climits>
+#include<algorithm>
 #include<string>
 #include<queue>
 #include<utility>
@@ -19,7 +19,7 @@ typedef vector<bool> vb;
 
 
 class Graph{
-public: 
+public:
     unordered_map<int, list<pi> > gmap;
 
     void addEdge(int src, int dest, int weight, bool bidir = true){
@@ -29,70 +29,39 @@ public:
         }
     }
 
-
-    vector<int>* print_all_paths_helper(int V, int E, int src, int dest, vb &visited){
-    //  1-> 2<->3--> 5   
-    //      |   |    ^ 
-    //      v   |    |
-    //      |    --> 4
-    //      v
-    //      6-> 5
-   visited[src] = true; 
-    if (src == dest){
-        vi *base_arr = new vi();
-        base_arr-> push_back(src);
-        return base_arr;
+    void print_paths(int V, int E, int src, int dest, vb &visited, vi path){
+        visited[src] = true;
+        if(src == dest){
+            path.push_back(src);
+            visited[src] = false;
+            for(int i = 0; i < path.size(); i++){
+                cout << path[i] << " ";
+            }
+          
+            cout << '\n';
+            return;
         }
-        vi *recursive_path = NULL;
+            path.push_back(src);
         for(auto neighbour : gmap[src]){
             if(!visited[neighbour.first]){
-                visited[neighbour.first] = true;
-                    recursive_path = print_all_paths_helper(V, E, neighbour.first, dest, visited);
-                if(recursive_path){
-                    break;
-                }
+                print_paths(V, E, neighbour.first, dest, visited, path);
             }
         }
-        if(recursive_path){
-            recursive_path-> push_back(src);
-        }
-        return recursive_path;
+        visited[src] = false;
     }
-
-
-    void print_all_paths(int V, int E, int src, int dest){
-       for(int i = 0 ; i < V; i++){   
-            vb visited(V, false);
-            vector<int> *path = print_all_paths_helper(V, E, i, dest, visited);
-            if(path){
-                for(int j = path-> size() - 1; j >= 0; j--){
-                    cout << path-> at(i);
-                }
-                cout << '\n';
-            }
-       }
-    }
-
 };
+
 int main(){
     std::ios_base::sync_with_stdio(false);
     Graph g;
-    int V, E, src, dest, u, v, w;
+    int V, E, u, v, w, src, dest;
     cin >> V >> E;
     for(int i = 0; i < E; i++){
         cin >> u >> v >> w;
         g.addEdge(u, v, w);
     }
     cin >> src >> dest;
-    g.print_all_paths(V, E, src, dest);
+    vb visited(V, false);
+    vi path;
+    g.print_paths(V, E, src, dest, visited, path);
 }
-
-
-
-
-// FOR:
-// vb vis
-
-// func(i, dest, vis);
-
-// [!, !, , , , , , , , , , ,]
