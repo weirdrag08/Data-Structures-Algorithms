@@ -25,7 +25,7 @@ int main(){
     cin.tie(NULL);
     cout.tie(NULL);
 
-    unordered_map<int, &list<int> > my_map;
+    unordered_map<int, vector<int>* > my_map;
     int n;
     cin >> n;
     vi v(n);
