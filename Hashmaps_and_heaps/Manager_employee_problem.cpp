@@ -25,7 +25,8 @@ int main(){
     std::ios_base::sync_with_stdio(false);
     cin.tie(NULL);
 
-    int n, emp, mgr;
+    int n;
+    string emp, mgr;
     map<string, vs> my_map;
     cin >> n;
     for(int i = 0; i < n; i++){
@@ -33,6 +34,6 @@ int main(){
         my_map[mgr].push_back(emp);
     }
     for(auto manager : my_map){
-        for()
+        for(auto employee : my_map)
     }
 }
