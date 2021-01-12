@@ -49,6 +49,7 @@ int main()
         {
             break;
         }
+// ? While using pointers to delete a key, never delete the pointer, as it will only delete the pointer which contains the address of the key - value pair and not the key - value pair itself. Of course, when using a map function you will always pass the key directly or indirectly with the help of pointers !! (it.first)
         route.erase(it->first);
         it = new_it;
     }

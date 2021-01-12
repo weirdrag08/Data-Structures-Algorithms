@@ -24,9 +24,9 @@ int main(){
     int n, element, k;
     cin >> n;
     vi v(n);
-    if(n % 2 != 0){
-        cout << "false" << '\n';
-    }
+    // if(n % 2 != 0){
+    //     cout << "false" << '\n';
+    // }
     for(int i = 0; i < n; i++){
         cin >> v[i];
     }
@@ -42,15 +42,15 @@ int main(){
     }
     
     bool not_paired = false;
-    for(auto element : my_map){
-        if(my_map.count(k - element.first) > 0){
-            my_map[k - element.first]--;
-            my_map[element.first]--;
-            if(my_map[k - element.first] == 0){
-                my_map.erase(k - element.first);
+    for(unordered_map<int, int>::iterator it = my_map.begin(); it != my_map.end(); it++){
+        if(my_map.count(k - (it-> first)) > 0){
+            my_map[k - (it-> first)]--;
+            my_map[it-> first]--;
+            if(my_map[k - (it-> first)] == 0){
+                my_map.erase(k - (it-> first));
             }
-            if(my_map[element.first] == 0){
-                my_map.erase(element.first);
+            if(my_map[it-> first] == 0){
+                my_map.erase(it-> first);
             }
         }
         else{
