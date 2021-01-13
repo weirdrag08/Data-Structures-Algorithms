@@ -36,21 +36,18 @@ public:
 };
 
 int main(){
-    int v;
-    cin >> v;
-    Graph g(v);
-    bool *visited = new bool[v];
+    int V, E, u, v, src;
+    cin >> V >> E;
+    Graph g(V);
+    bool *visited = new bool[V];
     for(int i = 0; i < v; i++){
         visited[i] = false;
     }
-    g.addEdge(0, 1);
-    g.addEdge(0, 4);
-    g.addEdge(1, 2);
-    g.addEdge(2, 3);
-    g.addEdge(2, 4);
-    g.addEdge(3, 4);
-    g.addEdge(3, 5);
-
-    g.dfs(0, visited);
+   for(int i = 0; i < E; i++){
+       cin >> u >> v;
+       g.addEdge(u, v);
+   }
+    cin >> src;
+    g.dfs(src, visited);
     cout << '\n';
 }
