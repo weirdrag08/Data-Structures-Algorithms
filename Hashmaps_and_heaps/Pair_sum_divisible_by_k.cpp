@@ -44,8 +44,10 @@ int main(){
     bool not_paired = false;
     for(unordered_map<int, int>::iterator it = my_map.begin(); it != my_map.end(); it++){
         if(my_map.count(k - (it-> first)) > 0){
+
             my_map[k - (it-> first)]--;
             my_map[it-> first]--;
+            cout << it->first << " =>" << my_map[it->first] << "   " << my_map.size();
             if(my_map[k - (it-> first)] == 0){
                 my_map.erase(k - (it-> first));
             }
