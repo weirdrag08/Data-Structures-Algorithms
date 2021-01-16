@@ -2,11 +2,12 @@
 #include<unordered_map>
 #include<list>
 #include<vector>
-#include<utility>
-#include<queue>
-#include<stack>
-#include<string>
+#include<climits>
 #include<algorithm>
+#include<stack>
+#include<queue>
+#include<utility>
+#include<string>
 using namespace std;
 
 #define mp make_pair
@@ -19,40 +20,45 @@ typedef vector<bool> vb;
 typedef long long ll;
 
 int main(){
-    string org, s;
-    cin >> org >> s;
-    unordered_map<char, int> my_map, match;
-    for(int i = 0; i < match.size(); i++){
-        if(match.count(s[i]) > 0){
-            match[s[i]]++;
+    string s1, s2;
+    cin >> s1 >> s2;
+    int match_size = s2.size(), match_count = 0;
+    unordered_map<char, int> s2_map, s1_map;
+    for(int i = 0; i < s2.size(); i++){
+        s2_map[s2[i]] += 1;
+    }
+    string temp = "";
+    int j = 0;
+    for(int i = 0; i < s1.size() || j < s1.size();){
+        if (match_count != s2.size() && i < s1.size()){
+            if(s1_map[s1[i]] < s2_map[s1[i]]){
+                match_count++;
+            }
+            s1_map[s1[i]] += 1;
+            temp += s1[i];
+            //cout << temp << '\n';
+            i++;
         }
         else{
-            match[s[i]] = 1;
-        }
-    }
-    int match_count = 0;
-    string *result = new string();
-    *result = "";
-    for(int i = 0, j = 0; i < org.size(); i++){
-        if(match_count != s.size()){
-            my_map[org[i]] += 1;
-            if(match.count(org[i]) > 0){
-                if(my_map[org[i]] < match[org[i]]){
-                    match_count++;
+            for(;j < i;){
+                if(s1_map[s1[j]] > s2_map[s1[j]] || s2_map.count(s1[j]) == 0){
+                    s1_map[s1[j]]--;
+                    cout << temp << '\n';
+                    temp = temp.substr(j + 1, i - j);
+                    cout << temp << '\n' << '\n';
+                    j++;
                 }
-            }
-            *result += org[i];
-        }
-        else{
-            string *new_result = new string();
-            *new_result = "";
-            for(int j = 0; j < result-> size(); j++){
-                if(my_map[org[j]] >= match[org[j]]){
-                    
+                else if(s1_map[s1[j]] <= s2_map[s1[j]]){
+                    //temp = temp.substr(j + 1, i - j);
+                    match_count--;
+                    break;
                 }
-                j++;
+                //cout << temp << '\n';
             }
         }
     }
-
+    // if(match_count != s2.size()){
+    //     temp += s1[j];
+    // }
+    cout << temp << '\n';
 }
