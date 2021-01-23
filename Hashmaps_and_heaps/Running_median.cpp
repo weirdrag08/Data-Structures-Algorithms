@@ -25,7 +25,7 @@ class median_pq{
 priority_queue<float> pql;
 priority_queue<float, vector<float>, greater<float> > pqr;
 
-public:
+public: 
     void add(float element){
         if(!pqr.empty() && element > pqr.top()){
             pqr.push(element);
