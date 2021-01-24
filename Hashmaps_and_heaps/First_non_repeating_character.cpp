@@ -34,7 +34,7 @@ int main(){
         if(my_map[s[i]] == 1){
             cout << i << '\n';
             found = true;
-            break;
+            break; 
         }
     }
     if(!found){
