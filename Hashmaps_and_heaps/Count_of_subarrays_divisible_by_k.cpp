@@ -2,12 +2,12 @@
 #include<unordered_map>
 #include<list>
 #include<vector>
-#include<utility>
+#include<climits>
 #include<stack>
 #include<queue>
-#include<algorithm>
 #include<string>
-#include<climits>
+#include<algorithm>
+#include<utility>
 using namespace std;
 
 #define mp make_pair
@@ -20,31 +20,26 @@ typedef vector<bool> vb;
 typedef long long ll;
 
 int main(){
-    std::ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-
     unordered_map<int, int> my_map;
-    int n, k, sum = 0, size = 0, rem, prev_index = -1;
+    int n, k, sum = 0, rem, count = 0;
     cin >> n;
     vi v(n);
     for(int i = 0; i < n; i++){
         cin >> v[i];
     }
     cin >> k;
-    my_map[sum] = prev_index;
+    my_map[0] = 1;
     for(int i = 0; i < n; i++){
         sum += v[i];
         rem = sum % k;
         if(rem < 0){
             rem += k;
         }
-        if(my_map.count(rem) > 0){
-             prev_index = my_map[rem];
-            size = max(size, i - prev_index);
-        }
-        else{
-            my_map[rem] = i;
-        }
+        int times = my_map[rem];
+        count += times;
+        my_map[rem]++;
     }
-    cout << size << '\n';
+    cout << count << '\n';
 }
+
+
