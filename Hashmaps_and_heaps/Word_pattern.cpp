@@ -21,6 +21,7 @@ typedef long long ll;
 
 int main(){
     unordered_map<string, char> my_map;
+    unordered_map<char, int> visited;
     string s1 = "", s2 = "", temp = "";
     getline(cin, s1);
     getline(cin, s2);
@@ -37,7 +38,15 @@ int main(){
                 }
             }
             else{
-                my_map[temp] = s1[j];
+                if(visited.count(s1[j]) == 0){
+                    my_map[temp] = s1[j];
+                    visited[s1[j]] = 1;
+                }
+                else{
+                    cout << "false" << '\n';
+                    rhyme = false;
+                    break;
+                }
             }
             temp = "";
             j++;
@@ -48,7 +57,7 @@ int main(){
     }
 
     if(rhyme){
-        if((my_map.count(temp) > 0 && my_map[temp] == s1[j]) || my_map.count(temp) == 0){
+        if((my_map.count(temp) > 0 && my_map[temp] == s1[j]) || (my_map.count(temp) == 0 && visited.count(s1[j]) == 0)){
             cout << "true" << '\n';
         }
         else{
