@@ -20,6 +20,9 @@ typedef vector<bool> vb;
 typedef long long ll;
 
 int main(){
+    std::ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    
     unordered_map<int, int> my_map;
     int n, k, rem;
     cin >> n;
@@ -33,20 +36,14 @@ int main(){
         my_map[rem] += 1;
     }
     bool divisible = true;
-    if (my_map[0] % 2 != 0 || (k % 2 == 0 && my_map[k / 2] % 2 != 0)){
-        divisible = false;
-        cout << "false" << '\n';
-    }
-
-    else{
+  
         for(auto remains : my_map){
-            if(remains.first != 0 && my_map[remains.first] != my_map[k - remains.first]){
+            if ((remains.first != 0 && my_map[remains.first] != my_map[k - remains.first]) || my_map[0] % 2 != 0 || (k % 2 == 0 && my_map[k / 2] % 2 != 0)){
                 divisible = false;
                 cout << "false" << '\n';
                 break;
             }
         }
-    }
 
     if(divisible){
         cout << "true" << '\n';
