@@ -4,9 +4,9 @@
 #include<vector>
 #include<stack>
 #include<queue>
-#include<climits>
 #include<algorithm>
 #include<string>
+#include<climits>
 #include<utility>
 using namespace std;
 
@@ -20,8 +20,6 @@ typedef vector<bool> vb;
 typedef long long ll;
 
 int main(){
-    std::ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
     unordered_map<int, int> my_map;
     int n, k, rem;
     cin >> n;
@@ -30,22 +28,28 @@ int main(){
         cin >> v[i];
     }
     cin >> k;
-    for(int i = 0; i < v.size(); i++){
+    for(int i = 0; i < n; i++){
         rem = v[i] % k;
         my_map[rem] += 1;
     }
     bool divisible = true;
-    for(auto remainders : my_map){
-        if((my_map[remainders.first] == my_map[k - remainders.first]) || (my_map[0] % 2 == 0) || (k % 2 == 0 && (my_map[k / 2] % 2 == 0))){
-            continue;
-        }
-        else{
-            cout << "false" << '\n';
-            divisible = false;
-            break;
+    if (my_map[0] % 2 != 0 || (k % 2 == 0 && my_map[k / 2] % 2 != 0)){
+        divisible = false;
+        cout << "false" << '\n';
+    }
+
+    else{
+        for(auto remains : my_map){
+            if(remains.first != 0 && my_map[remains.first] != my_map[k - remains.first]){
+                divisible = false;
+                cout << "false" << '\n';
+                break;
+            }
         }
     }
+
     if(divisible){
         cout << "true" << '\n';
     }
+
 }
