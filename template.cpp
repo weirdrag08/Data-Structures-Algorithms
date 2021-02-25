@@ -14,11 +14,16 @@ using namespace std;
 #define INFI 10e8
 #define INF 10e7
 
+typedef long long ll;
 typedef pair<int, int> pi;
 typedef vector<int> vi;
+typedef vector<long> vl;
+typedef vector<long long> vll;
+typedef vector<long long int> vlli;
 typedef vector<bool> vb;
-typedef long long ll;
 typedef vector<vector<int> > vvi;
+typedef vector<vector<long long> > vvll;
+typedef vector<vector<long long int> > vvlli;
 typedef vector<vector<bool> > vvb;
 
 int main(){

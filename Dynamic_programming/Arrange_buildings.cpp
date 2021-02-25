@@ -42,5 +42,6 @@ int main(){
         plot[1][i] = plot[0][i - 1];
     }
     lli one_sided_comb = plot[0][n] + plot[1][n];
+    // * We could have used power function but power function returns the value in e+(or 10 ^), so we can just multiply
     cout << (one_sided_comb * one_sided_comb) << '\n';
 }
