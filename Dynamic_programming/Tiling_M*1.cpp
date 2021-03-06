@@ -26,17 +26,20 @@ typedef vector<vector<long long> > vvll;
 typedef vector<vector<long long int> > vvlli;
 typedef vector<vector<bool> > vvb;
 
-int main(){
+int main()
+{
     std::ios_base::sync_with_stdio(false);
     cin.tie();
 
-    int n;
-    cin >> n;
+    int n, m;
+    cin >> n >> m;
     vi dp(n + 1, 0);
-    dp[1] = 1;
-    dp[2] = 2;
-    for(int i = 3; i <= n; i++){
-        dp[i] = dp[i - 2] + dp[i - 1]; 
+    for(int i = 1; i < m; i++){
+        dp[i] = 1;
     }
-    cout << dp[n] << '\n'; 
+    dp[m] = 2;
+    for(int i = m + 1; i <= n; i++){
+        dp[i] = dp[i - 1] + dp[i - m];
+    }
+    cout << dp[n] << '\n';
 }
