@@ -1,13 +1,13 @@
-#include<iostream>
-#include<unordered_map>
-#include<list>
-#include<vector>
-#include<stack>
-#include<queue>
-#include<algorithm>
-#include<string>
-#include<climits>
-#include<utility>
+#include <iostream>
+#include <unordered_map>
+#include <list>
+#include <vector>
+#include <stack>
+#include <queue>
+#include <algorithm>
+#include <string>
+#include <climits>
+#include <utility>
 using namespace std;
 
 #define mp make_pair
@@ -30,5 +30,4 @@ typedef vector<vector<bool> > vvb;
 int main(){
     std::ios_base::sync_with_stdio(false);
     cin.tie();
-     
 }
