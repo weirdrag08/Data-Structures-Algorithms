@@ -13,6 +13,7 @@ using namespace std;
 #define mp make_pair
 #define INFI 10e8
 #define INF 10e7
+#define mod 1000000007
 
 typedef long long ll;
 typedef pair<int, int> pi;
