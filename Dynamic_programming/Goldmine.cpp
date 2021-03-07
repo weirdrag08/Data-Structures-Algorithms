@@ -23,7 +23,11 @@ typedef vector<vector<int> > vvi;
 int max_gold_path(int r, int c, vvi &mine, vvi &dp){
     for(int j = 1; j < c; j++){
         for(int i = 0; i < r; i++){
-            if(i == 0){
+            // * Very important case => When there is only 1 row, so we can just come from dp[i][j - 1] to dp[i][j].
+            if(r == 1){
+                dp[i][j] = dp[i][j - 1] + mine[i][j];
+            }
+            else if(i == 0){
                 dp[i][j] = mine[i][j] + max(dp[i][j - 1], dp[i + 1][j - 1]);
             }
             else if(i == r - 1){
