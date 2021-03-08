@@ -14,6 +14,7 @@ using namespace std;
 #define INFI 10e8
 #define INF 10e7
 #define mod 1000000007
+#define sieve_limit 10e6
 
 typedef long long ll;
 typedef pair<int, int> pi;
@@ -30,4 +31,6 @@ typedef vector<vector<bool> > vvb;
 int main(){
     std::ios_base::sync_with_stdio(false);
     cin.tie(); 
+
+
 }
