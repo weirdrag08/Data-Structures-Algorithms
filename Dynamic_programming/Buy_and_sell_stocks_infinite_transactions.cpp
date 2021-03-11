@@ -35,7 +35,6 @@ int main(){
     int n, _min = INT_MAX, total_max_profit = 0;
     cin >> n;
     vi v(n);
-    bool sold = false;
     for(int i = 0; i < n; i++){
         cin >> v[i];
     }
