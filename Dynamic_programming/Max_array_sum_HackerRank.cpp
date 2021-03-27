@@ -33,29 +33,22 @@ int main(){
     std::ios_base::sync_with_stdio(false);
     cin.tie();
 
-    string s;
-    cin >> s;
-    int n = s.size(), count = 0;
-    vvb dp(n, vb(n, false));
-    for(int g = 0; g < n; g++){
-        for(int i = 0, j = g; j < n; i++, j++){
-            if(g == 0){
-                dp[i][j] = true;
-                count++;
-            }
+    int n, _max = 0;
+    cin >> n;
+    vi v(n);
+    vvi dp(2, vi(n, 0));
 
-            else if(g == 1){
-                if(s[i] == s[j]){
-                    dp[i][j] = true;
-                    count++;
-                }
-               
-            }
-            else{
-                s[i] == s[j] && dp[i + 1][j - 1] == true ? dp[i][j] = true : dp[i][j] = false;
-                if (dp[i][j]) count++;
-            }
-        }
+    for(int i = 0; i < n; i++){
+        cin >> v[i];
     }
-    cout << count << '\n';
+    dp[0][0] = 0;
+    dp[1][0] = v[0];
+    for(int i = 1; i < n; i++){
+        dp[0][i] = max(dp[0][i - 1], dp[1][i - 1]);
+        dp[1][i] = v[i] + dp[0][i - 1]; 
+    }
+   
+    max(dp[0][n - 1], dp[1][n - 1]) < 0 ? _max = 0 : _max = max(dp[0][n - 1], dp[1][n - 1]);
+    cout << _max << '\n';
 }
+    
