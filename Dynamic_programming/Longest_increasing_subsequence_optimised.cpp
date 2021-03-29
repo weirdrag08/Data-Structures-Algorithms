@@ -54,7 +54,7 @@ int lis(vi &v){
 
 int main(){
     std::ios_base::sync_with_stdio(false);
-    cin.tie();
+    cin.tie(NULL);
 
     int n;
     cin >> n;

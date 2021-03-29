@@ -29,7 +29,7 @@ typedef vector<vector<bool> > vvb;
 int main()
 {
     std::ios_base::sync_with_stdio(false);
-    cin.tie();
+    cin.tie(NULL);
 
     int n, k, f_min = INT_MAX, s_min = INT_MAX;
     cin >> n >> k;

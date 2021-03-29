@@ -31,7 +31,7 @@ typedef vector<vector<bool> > vvb;
 
 int main(){
     std::ios_base::sync_with_stdio(false);
-    cin.tie();
+    cin.tie(NULL);
 
     string s;
     cin >> s;

@@ -51,7 +51,7 @@ int b_search(vi &v, vi &dp, int left, int right, int target){
 
 int main(){
     std::ios_base::sync_with_stdio(false);
-    cin.tie();
+    cin.tie(NULL);
 
     int n, left = 0, right = 0, max_len = 0;
     cin >> n;

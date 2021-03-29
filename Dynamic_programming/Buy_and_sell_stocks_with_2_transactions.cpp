@@ -30,7 +30,7 @@ typedef vector<vector<bool> > vvb;
 
 int main(){
     std::ios_base::sync_with_stdio(false);
-    cin.tie();
+    cin.tie(NULL);
     int n, _max = INT_MIN, _max2 = INT_MIN, _min = INT_MAX;
     cin >> n;
     vi v(n);

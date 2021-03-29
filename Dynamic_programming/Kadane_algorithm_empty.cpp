@@ -31,7 +31,7 @@ typedef vector<vector<bool> > vvb;
 
 int main(){
     std::ios_base::sync_with_stdio(false);
-    cin.tie();
+    cin.tie(NULL);
 
     // * If we can return a empty set, then the minimal value which can be returned is 0, because ∑(empty) = 0, ie if max subarray sum < 0, then we can return the max value = 0, but if we have to return a non-empty set, then we have to return the best, whether it is positive or negative.
     // * The only difference in both codes is the initialization of the best and current best variable.

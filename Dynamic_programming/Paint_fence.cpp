@@ -30,7 +30,7 @@ typedef vector<vector<bool> > vvb;
 
 int main(){
     std::ios_base::sync_with_stdio(false);
-    cin.tie();
+    cin.tie(NULL);
 
     int n, k, same = 0, diff = 0, total = 0;
     cin >> n >> k;

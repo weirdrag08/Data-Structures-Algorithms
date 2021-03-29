@@ -59,7 +59,7 @@ int max_gold_path(vvi &mine){
 
 int main(){
     std::ios_base::sync_with_stdio(false);
-    cin.tie();
+    cin.tie(NULL);
 
     int r, c, curr_max = 0;
     cin >> r >> c;

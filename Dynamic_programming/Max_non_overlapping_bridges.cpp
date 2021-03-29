@@ -31,7 +31,7 @@ typedef vector<vector<bool> > vvb;
 
 int main(){
     std::ios_base::sync_with_stdio(false);
-    cin.tie();
+    cin.tie(NULL);
 
     int n, N, S, _max, left = 0, right = 0, midpoint = 0;
     cin >> n;
