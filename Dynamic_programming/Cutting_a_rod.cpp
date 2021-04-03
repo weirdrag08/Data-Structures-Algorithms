@@ -18,7 +18,7 @@ int cutting_rod(int *arr, int size){
     }
     return dp[size];
 }
-
+ 
 int main(){
     int arr[1000], size;
     cout << "Enter the size of the array: " << endl;
