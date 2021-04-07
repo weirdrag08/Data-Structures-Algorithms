@@ -5,7 +5,7 @@ These included beginner, medium and hard level problems for Data-Structures & Al
 
 
 # Content List 
-- [Binary Search](/Binary%20Search)
+- [Binary Search](/Binary%20Search/README.md)
 - [Dynamic Programming](/Dynamic_programming)
 - [Generic trees](/Generic%20Trees)
 - [Graphs](/Graphs)
