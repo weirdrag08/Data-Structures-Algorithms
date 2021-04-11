@@ -36,19 +36,19 @@ int main(){
     string s1, s2;
     cin >> s1 >> s2;
     int n = (int) s1.size(), m = (int) s2.size();
-    vvi dp(n, vi(m, 0));
+    vvi dp(n + 1, vi(m + 1, 0));
 
-    for(int i = 0, j = 1; j < m; j++){
+    for(int i = 0, j = 1; j <= m; j++){
         dp[i][j] = j;
     }
 
-    for(int i = 1, j = 0; i < n; i++){
+    for(int i = 1, j = 0; i <= n; i++){
         dp[i][j] = i;
     }
 
-    for(int i = 1; i < n; i++){
-        for(int j = 1; j < m; j++){
-            if(s1[i] == s2[j]){
+    for(int i = 1; i <= n; i++){
+        for(int j = 1; j <= m; j++){
+            if(s1[i - 1] == s2[j - 1]){
                 dp[i][j] = dp[i - 1][j - 1];
             }
             else{
@@ -56,5 +56,5 @@ int main(){
             }
         }
     }
-    cout << dp[n - 1][m - 1] << '\n';
+    cout << dp[n][m] << '\n';
 }
