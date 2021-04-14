@@ -124,5 +124,5 @@ int main(){
         }
     }
     int max_infinity = find_infinity(n, m, universe);
-    cout << 1 + max_infinity << '\n';
+    cout << 1 + max_infinity << '\n'; 
 }
