@@ -10,6 +10,6 @@ These included beginner, medium and hard level problems for Data-Structures & Al
 - [Generic trees](/Generic%20Trees/README.md)
 - [Graphs](/Graphs)
 - [Hashmaps And Heaps](/Hashmaps_and_heaps)
-- [Linked List](/Linked%20List)
+- [Linked List](/Linked%20List/README.md)
 - [Recursion](/Recursion)
 - [Stacks](/Stacks)
