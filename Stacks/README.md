@@ -8,4 +8,6 @@
 - [Infix Evaluation](/Stacks/infix_eval.cpp)
 - [Infix To Prefix & Postfix](/Stacks/infix_to_prefix_postfix.cpp)
 - [Merge Overlapping Intervals](/Stacks/merge_overlapping_intervals.cpp)
-- 
+- [Min Stack 1](/Stacks/min_stack_1.cpp)
+- [Min Stack 2](/Stacks/merge_overlapping_intervals.cpp)
+- [Normal Stack](/Stacks/normal_stack.cpp)
