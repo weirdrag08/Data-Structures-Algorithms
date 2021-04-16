@@ -3,3 +3,6 @@
 - [Balance Brackets](/Stacks/balance_brackets.cpp)
 - [Celebrity Problem](/Stacks/celebrity_problem.cpp)
 - [Duplicate Brackets](/Stacks/duplicate_bracket.cpp)
+- [Dynamic Stack](/Stacks/dynamic_stack.cpp)
+- [Largest Area Histogram](/Stacks/histogram_area.cpp)
+- [Infix Evaluation](/Stacks/infix_eval.cpp)
