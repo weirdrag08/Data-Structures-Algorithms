@@ -6,3 +6,6 @@
 - [Dynamic Stack](/Stacks/dynamic_stack.cpp)
 - [Largest Area Histogram](/Stacks/histogram_area.cpp)
 - [Infix Evaluation](/Stacks/infix_eval.cpp)
+- [Infix To Prefix & Postfix](/Stacks/infix_to_prefix_postfix.cpp)
+- [Merge Overlapping Intervals](/Stacks/merge_overlapping_intervals.cpp)
+- 
