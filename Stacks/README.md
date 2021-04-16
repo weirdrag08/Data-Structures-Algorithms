@@ -13,4 +13,4 @@
 - [Normal Stack](/Stacks/normal_stack.cpp)
 - [Postfix Evaluation & Conversion](/Stacks/postfix_eval_and_conversions.cpp)
 - [Prefix Evaluation & Conversion](/Stacks/postfix_eval_and_conversions.cpp)
-- 
+- [Sliding Window Maximum](/Stacks/sliding_window_max.cpp)
