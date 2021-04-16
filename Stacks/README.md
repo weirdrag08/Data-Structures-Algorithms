@@ -1,5 +1,5 @@
 # Contents
-Data Structure: Stacks
+## Data Structure: Stacks
 
 - [Maximum Index Product](/Stacks/Maximum_index_product_HackerRank.cpp)
 - [Next Greater Element To the Right](/Stacks/Ngetr.cpp)
