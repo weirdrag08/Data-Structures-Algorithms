@@ -1,0 +1,1 @@
+- [Maximum Index Product](/Stacks/Maximum_index_product_HackerRank.cpp)
