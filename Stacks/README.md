@@ -16,3 +16,4 @@
 - [Sliding Window Maximum](/Stacks/sliding_window_max.cpp)
 - [Smallest Number Pattern](/Stacks/smallest_number_pattern.cpp)
 - [Stock Span Problem](/Stacks/stock_span.cpp)
+- [Basic Functions of Stack](/Stacks/tempCodeRunnerFile.cpp)
