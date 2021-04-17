@@ -1,0 +1,22 @@
+# Contents
+## Data Structure: Stacks
+
+- [Maximum Index Product](/Stacks/Maximum_index_product_HackerRank.cpp)
+- [Next Greater Element To the Right](/Stacks/Ngetr.cpp)
+- [Balance Brackets](/Stacks/balance_brackets.cpp)
+- [Celebrity Problem](/Stacks/celebrity_problem.cpp)
+- [Duplicate Brackets](/Stacks/duplicate_bracket.cpp)
+- [Dynamic Stack](/Stacks/dynamic_stack.cpp)
+- [Largest Area Histogram](/Stacks/histogram_area.cpp)
+- [Infix Evaluation](/Stacks/infix_eval.cpp)
+- [Infix To Prefix & Postfix](/Stacks/infix_to_prefix_postfix.cpp)
+- [Merge Overlapping Intervals](/Stacks/merge_overlapping_intervals.cpp)
+- [Min Stack 1](/Stacks/min_stack_1.cpp)
+- [Min Stack 2](/Stacks/merge_overlapping_intervals.cpp)
+- [Normal Stack](/Stacks/normal_stack.cpp)
+- [Postfix Evaluation & Conversion](/Stacks/postfix_eval_and_conversions.cpp)
+- [Prefix Evaluation & Conversion](/Stacks/postfix_eval_and_conversions.cpp)
+- [Sliding Window Maximum](/Stacks/sliding_window_max.cpp)
+- [Smallest Number Pattern](/Stacks/smallest_number_pattern.cpp)
+- [Stock Span Problem](/Stacks/stock_span.cpp)
+- [Basic Functions of Stack](/Stacks/tempCodeRunnerFile.cpp)

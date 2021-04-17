@@ -12,4 +12,4 @@ These included beginner, medium and hard level problems for Data-Structures & Al
 - [Hashmaps And Heaps](/Hashmaps_and_heaps)
 - [Linked List](/Linked%20List/README.md)
 - [Recursion](/Recursion)
-- [Stacks](/Stacks)
+- [Stacks](/Stacks/README.md)

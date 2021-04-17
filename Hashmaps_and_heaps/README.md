@@ -1,0 +1,3 @@
+- [All Anagrams In a string](/Hashmaps_and_heaps/All_anagrams_in_string.cpp)
+- [Anagram Hackerrank Question](/Hashmaps_and_heaps/Anagram_hackerrank.cpp)
+- [Array Divided into pairs divisible by K](/Hashmaps_and_heaps/Array_divided_in_pairs_divisible_by_k.cpp)
