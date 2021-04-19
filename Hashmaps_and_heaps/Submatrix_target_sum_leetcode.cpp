@@ -40,25 +40,25 @@ int count_submatrices(vvi &matrix, int target){
             prefix_sum[i][j] = prefix_sum[i][j - 1] + matrix[i][j];
         }
     }
-    
+
     for(int k = 0; k < m; k++){
         for(int j = k; j < m; j++){
             unordered_map<int, int> my_map;
             int matrix_sum = 0;
             for(int i = 0; i < n; i++){
                 if(k == 0){
-                    prefix_sum[i][j] == target ? count++ : count = count;
                     matrix_sum += prefix_sum[i][j];
-                    if(my_map.count(matrix_sum - k) > 0){
-                        count += my_map[matrix_sum - k];
+                    matrix_sum == target ? count++ : count = count;
+                    if(my_map.count(matrix_sum - target) > 0){
+                        count += my_map[matrix_sum - target];
                     }
                     my_map[matrix_sum] += 1;
                 }
                 else{
-                    prefix_sum[i][j] - prefix_sum[i][k - 1] == target ? count++ : count = count;
                     matrix_sum += prefix_sum[i][j] - prefix_sum[i][k - 1];
-                    if(my_map.count(matrix_sum - k) > 0){
-                        count += my_map[matrix_sum - k];
+                    matrix_sum == target ? count++ : count = count;
+                    if(my_map.count(matrix_sum - target) > 0){
+                        count += my_map[matrix_sum - target];
                     }
                     my_map[matrix_sum] += 1;
                 }
