@@ -55,9 +55,9 @@ int main(){
 
     dp2[0] = 0;
     for(int j = 1; j < n; j++){
-        for(int i = j; i > 0; i--){
-            if(dp[i][j]){
-                dp2[j] = min(dp2[j], dp2[i - 1] + 1);
+        for(int i = j; i >= 0; i--){
+            if(dp[i][j]){ 
+                i == 0 ? dp2[j] = 0 : dp2[j] = min(dp2[j], dp2[i - 1] + 1);
             }
         }
     }
