@@ -49,7 +49,7 @@ int main(){
                 dp[i][j] = v[j - 1] * v[j] * v[j + 1];
 
             else{
-                for(int k = j - g, l = i + 1; k < g; k++, l++){
+                for(int k = j - g, l = i + 1; k < j; k++, l++){
                     dp[i][j] = min(dp[i][j], dp[i][k] + dp[l][j] + (v[i] * v[j + 1] * v[k + 1]));
                 }
             }        
