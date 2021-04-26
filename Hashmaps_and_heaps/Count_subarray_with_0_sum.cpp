@@ -21,6 +21,7 @@ typedef long long ll;
 
 int main(){
     unordered_map<int, int> my_map;
+    my_map[0] = 1;
     int n, element, prev_sum = 0, count = 0;
     cin >> n;
     for(int i = 0; i < n; i++){
