@@ -81,7 +81,7 @@ public:
             {
                 bool ans = schedule_finish_helper(i, courses, visited, order, path, in_stack);
                 if (!ans)
-                    return ans;
+                    return false;
             }
         }
         return true;
