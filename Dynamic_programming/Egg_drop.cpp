@@ -33,27 +33,24 @@ int main(){
     std::ios_base::sync_with_stdio(false);
     cin.tie(NULL);
 
-    int n;
-    cin >> n;
-    vi v(n);
-    for(int i = 0; i < n; i++){
-        cin >> v[i];
+    int n, k;
+    cin >> n >> k;
+
+    vvi dp(n + 1, vi(k + 1, 0));
+    for(int i = 0;  i <= n; i++){
+        dp[i][1] = 1;
     }
-    vvi dp(n - 1, vi(n - 1, INFI));
-    for(int g = 0; g < n - 1; g++){
-        for(int i = 0, j = g; j < n - 1; i++, j++){
-            if(g == 0)
-                dp[i][j] = 0;
-
-            else if(g == 1)
-                dp[i][j] = v[j - 1] * v[j] * v[j + 1];
-
-            else{
-                for(int k = j - g, l = i + 1; k < g; k++, l++){
-                    dp[i][j] = min(dp[i][j], dp[i][k] + dp[l][j] + (v[i] * v[j + 1] * v[k + 1]));
-                }
-            }        
+    for(int j = 1; j <= k; j++){
+        dp[1][j] = j;
+    }
+    for(int i = 2; i <= n; i++){
+        for(int j = 2; j <= k; j++){
+            int _min = INT_MAX;
+            for(int l = 0, m = j - 1; l < j; l++, m--){
+                _min = min(_min, max(dp[i - 1][l], dp[i][m]) + 1);
+            }
+            dp[i][j] = _min;
         }
     }
-    cout << dp[0][n - 2] << '\n';
+    cout << dp[n][k] << '\n';
 }
