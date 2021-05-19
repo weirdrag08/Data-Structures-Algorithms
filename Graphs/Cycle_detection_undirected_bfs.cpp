@@ -74,12 +74,7 @@ public:
                }
             }
         }
-        if(cycle){
-            cout << "true" << '\n';
-        }
-        else{
-            cout << "false" << '\n';
-        }
+        cout << boolalpha << cycle << '\n';
     }
 };
 
