@@ -82,7 +82,9 @@ private:
         if(root-> children[word[0] - 'a'] == NULL)
             return;
 
-        remove_helper(root-> children[word[0] - 'a'], word.substr(1));    
+        remove_helper(root-> children[word[0] - 'a'], word.substr(1));   
+        if(root-> children[word[0] - 'a']-> terminal)
+           return; 
         bool leaf = true;
         for(int i = 0; i < 26; i++){
             if(root-> children[word[0] - 'a']-> children[i] != NULL){
