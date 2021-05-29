@@ -65,21 +65,19 @@ Node *input()
     return root;
 }
 
-int max_subtree_sum(Node *root, int &max_sum, Node *max_node){
-    cout << root-> data << '\n';
+int max_sum(Node *root, int &_max, int &max_node){
     if(root == NULL)
         return 0;
-    if(root-> children.size() == 0)
-        return root-> data;
-
+    int recursive_sum = 0;    
     for(int i = 0; i < (int) root-> children.size(); i++){
-        int recursive_ans = max_subtree_sum(root-> children[i], max_sum, max_node);
-        if(recursive_ans + root-> data > max_sum){
-            max_sum = root-> data + recursive_ans;
-            max_node = root;
-        }
+        recursive_sum += max_sum(root-> children[i], _max, max_node);
+    }   
+    recursive_sum += root-> data;
+    if(_max < recursive_sum){
+        _max = recursive_sum;
+        max_node = root-> data;
     }
-    return max_sum;
+    return recursive_sum; 
 }
 
 int main(){
@@ -87,8 +85,8 @@ int main(){
     cin.tie(NULL);
 
     Node *root = input();
-    int current_sum = 0, max_sum = INT_MIN;
-    Node *max_node = NULL;
-    max_sum = max_subtree_sum(root, max_sum, max_node);
-    cout << max_node-> data << "@" << max_sum << '\n';
+    int _max = INT_MIN;
+    int max_node = INT_MIN;
+    int total_sum = max_sum(root, _max, max_node);
+    cout << max_node << "@" << _max << '\n'; 
 }

@@ -65,24 +65,21 @@ Node *input()
     return root;
 }
 
-void k_th_largest_helper(Node *root, int &target, int &ans){
+int calc_diameter(Node *root, int &diameter){
     if(root == NULL)
-        return;
-    if(root-> data < target){
-        ans = max(ans, root-> data);
-    }    
-    for(Node *child : root-> children)
-        k_th_largest_helper(child, target, ans);
-}
-
-int k_th_largest(Node *root, int k){
-    int target = INT_MAX, ans = INT_MIN;
-     while(k--){
-         k_th_largest_helper(root, target, ans);
-         target = ans;
-         ans = INT_MIN;
-     }
-     return target;
+        return 0;
+    int _max = 0, _max2 = 0;
+    for(Node* child : root-> children){
+        int recursive_ans = calc_diameter(child, diameter);
+        if(recursive_ans > _max){
+            _max2 = _max;
+            _max = recursive_ans;
+        }
+        else if(_max >= recursive_ans && _max2 < recursive_ans)
+            _max2 = recursive_ans;
+    }
+    diameter = max(diameter, _max + _max2);
+    return 1 + _max;
 }
 
 int main(){
@@ -90,7 +87,7 @@ int main(){
     cin.tie(NULL);
 
     Node *root = input();
-    int k;
-    cin >> k;
-    cout << k_th_largest(root, k) << '\n';
+    int diameter = 0;
+    calc_diameter(root, diameter);
+    cout << diameter << '\n';
 }

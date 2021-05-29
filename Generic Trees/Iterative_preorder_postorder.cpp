@@ -65,24 +65,37 @@ Node *input()
     return root;
 }
 
-void k_th_largest_helper(Node *root, int &target, int &ans){
-    if(root == NULL)
-        return;
-    if(root-> data < target){
-        ans = max(ans, root-> data);
-    }    
-    for(Node *child : root-> children)
-        k_th_largest_helper(child, target, ans);
-}
-
-int k_th_largest(Node *root, int k){
-    int target = INT_MAX, ans = INT_MIN;
-     while(k--){
-         k_th_largest_helper(root, target, ans);
-         target = ans;
-         ans = INT_MIN;
-     }
-     return target;
+void iterative_pre_post(Node *root){
+    stack<pair<Node*, int> > my_stack;
+    vi preorder, postorder;
+    // * 1) Node -> status : -1 (push in preorder, just visiting)
+    // * 2) Node -> status : 0 - children.size() - 1 (push child in stack)
+    // * 3) Node -> status : children.size() (have pushed all the children in stack, and now we are in postorder wrt to current node, so push in postorder)
+    my_stack.push(mp(root, -1));
+    while(!my_stack.empty()){
+        auto top = my_stack.top();
+        my_stack.pop();
+        if(top.second == -1){ // * 1st condition
+            preorder.pb(top.first-> data);
+            top.second++;
+            my_stack.push(top);
+        } 
+        else if(top.second >= 0 && top.second < top.first-> children.size()){ // * 2nd condition
+            auto child = mp(top.first-> children[top.second], -1);
+            top.second++;
+            my_stack.push(top);
+            my_stack.push(child);
+        }
+        else if(top.second >= top.first-> children.size()){ // * 3rd condition
+            postorder.pb(top.first-> data);
+        }
+    }
+    for(int i : preorder)
+        cout << i << " ";
+    cout << '\n';
+    for(int i : postorder)
+        cout << i << " ";
+    cout << '\n';    
 }
 
 int main(){
@@ -90,7 +103,5 @@ int main(){
     cin.tie(NULL);
 
     Node *root = input();
-    int k;
-    cin >> k;
-    cout << k_th_largest(root, k) << '\n';
+    iterative_pre_post(root);
 }
