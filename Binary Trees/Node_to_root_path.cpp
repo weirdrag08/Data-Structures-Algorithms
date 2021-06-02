@@ -8,7 +8,6 @@
 #include <string>
 #include <climits>
 #include <utility>
-#include<string>
 using namespace std;
 
 #define mp make_pair
@@ -88,27 +87,30 @@ Node* input(){
     return root;
 }
 
-int multisolver_helper(Node *root, int &nodes, int &_max, int curr_height, int &height){
+vector<int>* NodeToRootPath(Node *root, int &end){
     if(root == NULL)
-        return 0;
-    nodes++;
-    _max = max(_max, root-> data);
-    height = max(height, curr_height);
-    int recursive_sum = 0;
+        return NULL;
+    if(root-> data == end){
+        vector<int> *base_arr = new vector<int>();
+        base_arr-> push_back(end);
+        return base_arr;
+    }
+    vector<int> *left_arr = NULL, *right_arr = NULL;    
     if(root-> left != NULL)
-       recursive_sum += multisolver_helper(root-> left, nodes, _max, curr_height + 1, height);
+       left_arr = NodeToRootPath(root-> left, end);
     if(root-> right != NULL)
-       recursive_sum += multisolver_helper(root-> right, nodes, _max, curr_height + 1, height);    
-    return root-> data + recursive_sum; 
-}
+       right_arr = NodeToRootPath(root-> right, end); 
 
-void multisolver(Node *root){
-    int nodes = 0, _max = 0, height = 0, curr_height = 0;
-    int sum = multisolver_helper(root, nodes, _max, curr_height, height);
-    cout << nodes << '\n';
-    cout << sum << '\n';
-    cout << _max << '\n';
-    cout << height << '\n';
+    if(left_arr != NULL){
+        left_arr-> push_back(root-> data);
+        return left_arr;
+    }          
+    else if(right_arr != NULL){
+        right_arr->push_back(root->data);
+        return right_arr;
+    }
+    else 
+        return NULL;
 }
 
 int main(){
@@ -116,5 +118,18 @@ int main(){
     cin.tie(NULL);
 
     Node *root = input();
-    multisolver(root);   
+    int end;
+    cin >> end;
+    vector<int> * result = NodeToRootPath(root, end);
+    if(result != NULL){
+        cout << "true" << '\n';
+        cout << '[';
+        for(int i = 0; i < (int) result-> size(); i++)
+            i != result-> size() - 1 ? cout << result-> at(i) << ", " : cout << result-> at(i);
+        cout << "]\n";    
+    }
+    else{
+        cout << "false" << '\n';
+        cout << "[]" << '\n';
+    }
 }

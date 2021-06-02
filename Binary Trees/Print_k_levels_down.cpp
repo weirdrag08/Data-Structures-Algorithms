@@ -8,7 +8,6 @@
 #include <string>
 #include <climits>
 #include <utility>
-#include<string>
 using namespace std;
 
 #define mp make_pair
@@ -88,27 +87,30 @@ Node* input(){
     return root;
 }
 
-int multisolver_helper(Node *root, int &nodes, int &_max, int curr_height, int &height){
+void kth_level(Node *root, int &k){
     if(root == NULL)
-        return 0;
-    nodes++;
-    _max = max(_max, root-> data);
-    height = max(height, curr_height);
-    int recursive_sum = 0;
-    if(root-> left != NULL)
-       recursive_sum += multisolver_helper(root-> left, nodes, _max, curr_height + 1, height);
-    if(root-> right != NULL)
-       recursive_sum += multisolver_helper(root-> right, nodes, _max, curr_height + 1, height);    
-    return root-> data + recursive_sum; 
-}
+        return;
+    queue<Node*> q;
+    q.push(root);
+    int level = 0, size = q.size();;
+    while(!q.empty()){
+        if(level > k)
+            break;
+        Node *front = q.front();
+        q.pop();
+        size--;
+        if(level == k)
+            cout << front-> data << '\n';
 
-void multisolver(Node *root){
-    int nodes = 0, _max = 0, height = 0, curr_height = 0;
-    int sum = multisolver_helper(root, nodes, _max, curr_height, height);
-    cout << nodes << '\n';
-    cout << sum << '\n';
-    cout << _max << '\n';
-    cout << height << '\n';
+        if(front-> left != NULL)
+            q.push(front-> left);
+        if(front-> right != NULL)
+            q.push(front-> right);
+        if(size == 0){
+            size = q.size();
+            level++;
+        }        
+    }
 }
 
 int main(){
@@ -116,5 +118,7 @@ int main(){
     cin.tie(NULL);
 
     Node *root = input();
-    multisolver(root);   
+    int k;
+    cin >> k;
+    kth_level(root, k);
 }
