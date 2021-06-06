@@ -87,22 +87,53 @@ Node* input(){
     return root;
 }
 
-int is_balanced_helper(Node *root, bool &balanced){
-    if(root == NULL)
-        return 0;
-    int leftside = 0, rightside = 0;
-    if(root-> left != NULL)
-        leftside = is_balanced_helper(root-> left, balanced);
-    if(root-> right != NULL)
-        rightside = is_balanced_helper(root-> right, balanced);
-    abs(leftside - rightside) <= 1 ? balanced = balanced : balanced = false;
-    return 1 + max(leftside, rightside);            
+class ans{
+public:
+    int data, nodes, _min, _max;
+    bool bst;
+
+    ans(){
+        this-> data = -1;
+        this-> bst = true;
+        this-> nodes = 0;
+        this-> _min = INT_MAX;
+        this-> _max = INT_MIN;
+    }
+};
+
+ans* largest_BST_helper(Node *root, pair<int, int> *result){
+    if(root == NULL){
+        ans *base_pair = new ans();
+        return base_pair;
+    }
+        ans *leftside = NULL, *rightside = NULL;
+        leftside = largest_BST_helper(root-> left, result);
+        rightside = largest_BST_helper(root-> right, result); 
+        ans *curr_pair = new ans();
+        if(leftside-> bst && rightside-> bst && root-> data > leftside-> _max && root-> data < rightside-> _min){
+            curr_pair-> data = root-> data;
+            curr_pair-> nodes = 1 + leftside-> nodes + rightside-> nodes;
+            curr_pair-> _min = min(root-> data, min(leftside-> _min, rightside-> _min));
+            curr_pair-> _max = max(root-> data, max(leftside-> _max, rightside-> _max));
+        }
+        else{
+            curr_pair-> bst = false;
+            curr_pair-> data = root-> data;
+            curr_pair-> nodes = 1 + leftside-> nodes + rightside-> nodes;
+            curr_pair->_min = min(root->data, min(leftside->_min, rightside->_min));
+            curr_pair->_max = max(root->data, max(leftside->_max, rightside->_max));
+        }
+        if(curr_pair-> bst && result-> second < curr_pair-> nodes){
+            result-> first = curr_pair-> data;
+            result-> second = curr_pair-> nodes;
+        }
+        return curr_pair;   
 }
 
-bool is_balanced(Node *root){
-    bool balanced = true;
-    int val = is_balanced_helper(root, balanced);
-    return balanced;
+pair<int, int>* largest_BST(Node *root){
+    pair<int, int> *result = new pair<int, int>(-1, 0);
+    largest_BST_helper(root, result);
+    return result;
 }
 
 int main(){
@@ -110,5 +141,6 @@ int main(){
     cin.tie(NULL);
 
     Node *root = input();
-    cout << boolalpha << is_balanced(root) << '\n';    
+    pair<int, int> *result = largest_BST(root);
+    cout << result-> first << "@" << result-> second << '\n';
 }

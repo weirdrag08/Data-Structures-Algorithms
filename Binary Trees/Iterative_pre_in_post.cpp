@@ -27,7 +27,7 @@ typedef vector<bool> vb;
 typedef vector<vector<int> > vvi;
 typedef vector<vector<long long> > vvll;
 typedef vector<vector<long long int> > vvlli;
-typedef vector<vector<bool> > vvb;
+typedef vector<vector<bool> > vvb; 
 
 class Node{
 public:
@@ -87,28 +87,56 @@ Node* input(){
     return root;
 }
 
-int is_balanced_helper(Node *root, bool &balanced){
+void iterative_traversals(Node *root){
     if(root == NULL)
-        return 0;
-    int leftside = 0, rightside = 0;
-    if(root-> left != NULL)
-        leftside = is_balanced_helper(root-> left, balanced);
-    if(root-> right != NULL)
-        rightside = is_balanced_helper(root-> right, balanced);
-    abs(leftside - rightside) <= 1 ? balanced = balanced : balanced = false;
-    return 1 + max(leftside, rightside);            
-}
+        return;
+    vi preorder, inorder, postorder;
+    stack<pair<Node*, int> > my_stack;
+    my_stack.push(mp(root, -1));
+    while(!my_stack.empty()){
+        pair<Node*, int> top = my_stack.top();
+        my_stack.pop();
+        if(top.second == -1){
+            preorder.pb(top.first-> data);
+            top.second++;
+            my_stack.push(top);
+        } 
+        else if(top.second == 0){
+            top.second++;
+            my_stack.push(top);
+            if(top.first-> left != NULL){
+                pair<Node*, int> child(top.first-> left, -1);
+                my_stack.push(child);
+            }
+        }
+        else if(top.second == 1){
+            top.second++;
+            my_stack.push(top);
+            if(top.first-> right != NULL){
+                pair<Node*, int> child(top.first-> right, -1);
+                my_stack.push(child);
+            }
+            inorder.pb(top.first-> data);
+        }
+        else{
+            postorder.pb(top.first-> data);
+        }
+    }
 
-bool is_balanced(Node *root){
-    bool balanced = true;
-    int val = is_balanced_helper(root, balanced);
-    return balanced;
+    for(int i : preorder)
+        cout << i << " ";
+    cout << '\n';
+    for(int i : inorder)
+        cout << i << " ";
+    cout << '\n';
+    for(int i : postorder)
+        cout << i << " ";
+    cout << '\n';           
 }
 
 int main(){
     std::ios_base::sync_with_stdio(false);
     cin.tie(NULL);
-
-    Node *root = input();
-    cout << boolalpha << is_balanced(root) << '\n';    
+     Node *root = input();
+     iterative_traversals(root);
 }

@@ -87,22 +87,39 @@ Node* input(){
     return root;
 }
 
-int is_balanced_helper(Node *root, bool &balanced){
+void back_to_normal(Node *root){
     if(root == NULL)
-        return 0;
-    int leftside = 0, rightside = 0;
+        return;
+    
+    if(root-> left != NULL){
+        Node *cloned = root->left;
+        Node *actual_left = root->left->left;
+        root-> left = actual_left;
+        delete cloned;
+    }
+
     if(root-> left != NULL)
-        leftside = is_balanced_helper(root-> left, balanced);
+        back_to_normal(root-> left);
     if(root-> right != NULL)
-        rightside = is_balanced_helper(root-> right, balanced);
-    abs(leftside - rightside) <= 1 ? balanced = balanced : balanced = false;
-    return 1 + max(leftside, rightside);            
+        back_to_normal(root-> right);
 }
 
-bool is_balanced(Node *root){
-    bool balanced = true;
-    int val = is_balanced_helper(root, balanced);
-    return balanced;
+void display(Node *root){
+    if(root == NULL)
+        return;
+    if(root-> left != NULL)
+        cout << root-> left-> data << " ";
+    else
+        cout << ". ";
+    cout << "<- " << root-> data << " -> ";
+    if(root-> right != NULL)
+        cout << root-> right-> data << '\n';  
+    else
+        cout << "." << '\n';
+    if(root-> left != NULL)
+        display(root-> left);
+    if(root-> right != NULL)
+        display(root-> right);                   
 }
 
 int main(){
@@ -110,5 +127,6 @@ int main(){
     cin.tie(NULL);
 
     Node *root = input();
-    cout << boolalpha << is_balanced(root) << '\n';    
+    back_to_normal(root);
+    display(root);
 }
