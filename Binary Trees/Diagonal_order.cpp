@@ -102,9 +102,35 @@ void display(Node *root){
     }    
 }
 
+void get_diagonal_order(Node *root){
+    if(root == NULL)
+        return;
+    queue<pair<Node*, int> > q;
+    unordered_map<int, vi> diagonal_order;
+    int _max = INT_MIN;
+    q.push(mp(root, 0));
+    while(!q.empty()){
+        pair<Node*, int> front = q.front();
+        q.pop();
+        _max = max(_max, front.second);
+        diagonal_order[front.second].__emplace_back(front.first-> data);
+        if(front.first-> left != NULL)
+            q.push(mp(front.first-> left, front.second + 1));
+        if(front.first-> right != NULL)
+            q.push(mp(front.first-> right, front.second));    
+    } 
+   for(int i = 0; i <= _max; i++){
+       cout << i << " -> ";
+       for (int j = 0; j < (int)diagonal_order[i].size(); j++)
+           cout << diagonal_order[i][j] << " ";
+       cout << '\n';    
+   }
+}
+
 int main(){
     std::ios_base::sync_with_stdio(false);
     cin.tie(NULL); 
 
     Node *root = input();
+    get_diagonal_order(root);
 }
